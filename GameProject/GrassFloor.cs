@@ -52,8 +52,6 @@ namespace GameProject
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, null, Color.Green, 0, new Vector2(0,0), 1.0f, SpriteEffects.None, 0);
-            //spriteBatch.Draw(texture2, new Vector2(400, 400), Color.Red);
-            //spriteBatch.Draw(texture2, new Vector2(position.X, position.Y / 2), null, Color.Purple, 0, new Vector2(0,0), 16.0f, SpriteEffects.None, 0);
         }
     }
 }

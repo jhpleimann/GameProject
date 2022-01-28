@@ -43,3 +43,4 @@ C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Cont
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\PlayerPose1.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\PlayerPose2.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\Pixel.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\Arial.xnb

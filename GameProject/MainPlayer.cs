@@ -51,6 +51,11 @@ namespace GameProject
         public bool Dead { get; set; } = false;
 
         /// <summary>
+        /// Returns if the game has started yet
+        /// </summary>
+        public bool GameStarted { get; set; } = false;
+
+        /// <summary>
         /// The bounding volume of the sprite
         /// </summary>
         public BoundingRectangle Bounds => bounds;
@@ -76,19 +81,26 @@ namespace GameProject
             gamePadState = GamePad.GetState(0);
             keyboardState = Keyboard.GetState();
 
-            // Apply the gamepad movement with inverted Y axis
             position += gamePadState.ThumbSticks.Left * new Vector2(1, -1);
             if (gamePadState.ThumbSticks.Left.X < 0) flipped = true;
             if (gamePadState.ThumbSticks.Left.X > 0) flipped = false;
 
-            // Apply keyboard movement
+            if(!GameStarted)
+            {
+                if((keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) ||
+                    (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) ||
+                    (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)))
+                {
+                    GameStarted = true;
+                }
+            }    
+
             if ((keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) && !jumping && OnGround && gravityTimer <= 0.0)
             {
                 jumping = true;
             }
             if(jumping && gravityTimer <= 0.0)
             {
-                //start timer
                 gravityTimer += gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if(jumping && gravityTimer >= gravityTimerMax)
@@ -99,13 +111,8 @@ namespace GameProject
             else if(jumping)
             {
                 gravityTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                //position.Y -= 
                 position.Y -= MathF.Pow((1 + (float)gameTime.ElapsedGameTime.TotalSeconds) * 3f, 2);
-                //position.Y -= 250f * (float)gameTime.ElapsedGameTime.TotalSeconds * ((float)gravityTimer - (float)gravityTimerMax / -2);
-                //position += new Vector2(0, -1);
-                //MOVE POSITION UP
             }
-            //if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)) position += new Vector2(0, 1);
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
                 position += new Vector2(-1, 0);
@@ -116,9 +123,8 @@ namespace GameProject
                 position += new Vector2(1, 0);
                 flipped = false;
             }
-            if(!OnGround)
+            if(!OnGround && GameStarted)
             {
-                //position.Y += MathF.Pow((1 + (float)gameTime.ElapsedGameTime.TotalSeconds) * 2, 2);
                 position.Y += 150f * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             //Update the bounds

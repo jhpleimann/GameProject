@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Arial.spritefont","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0.2816131
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/DoorEntrance.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/DoorEntrance.xnb","TextureProcessor","Texture2DContent",289,32853,0.146576
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassFloor.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/GrassFloor.xnb","TextureProcessor","Texture2DContent",165,16469,0.1707519
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloor.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/GrassTrapFloor.xnb","TextureProcessor","Texture2DContent",190,16469,0.0037369
@@ -6,4 +7,3 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Pixel.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/Pixel.xnb","TextureProcessor","Texture2DContent",119,89,0.2623956
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose1.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/PlayerPose1.xnb","TextureProcessor","Texture2DContent",807,16469,0.2196098
 "C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose2.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/PlayerPose2.xnb","TextureProcessor","Texture2DContent",801,16469,0.0068227
-"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/ZaWarudo.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Content/ZaWarudo.xnb","TextureProcessor","Texture2DContent",1155,16469,0.243021

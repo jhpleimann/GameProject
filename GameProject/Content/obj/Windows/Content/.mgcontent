@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Arial.spritefont</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/DoorEntrance.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassFloor.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloor.png</File>
@@ -11,7 +12,6 @@
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Pixel.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose1.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose2.png</File>
-    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/ZaWarudo.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
