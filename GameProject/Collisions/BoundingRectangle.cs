@@ -26,6 +26,13 @@ namespace GameProject.Collisions
 
         public float Bottom => Y + Height;
 
+        /// <summary>
+        /// The Bounding Rectangle
+        /// </summary>
+        /// <param name="x">The x coordinate</param>
+        /// <param name="y">The y coordinate</param>
+        /// <param name="width">The width</param>
+        /// <param name="height">The height</param>
         public BoundingRectangle(float x, float y, float width, float height)
         {
             X = x;
@@ -34,6 +41,12 @@ namespace GameProject.Collisions
             Height = height;
         }
 
+        /// <summary>
+        /// The Bounding Rectangle
+        /// </summary>
+        /// <param name="position">The position</param>
+        /// <param name="width">The width</param>
+        /// <param name="height">The height</param>
         public BoundingRectangle(Vector2 position, float width, float height)
         {
             X = position.X;
@@ -49,19 +62,7 @@ namespace GameProject.Collisions
         /// <returns>true for collision, false otherwise</returns>
         public bool CollidesWith(BoundingRectangle other)
         {
-            //return CollisionHelper.Collides(this, other);
             return !(this.Right < other.Left || this.Left > other.Right || this.Top > other.Bottom || this.Bottom < other.Top);
         }
-
-        /*
-        /// <summary>
-        /// Tests for a collision between this and a bounding circle
-        /// </summary>
-        /// <param name="other">The bounding circle</param>
-        /// <returns>true for collision, false otherwise</returns>
-        public bool CollidesWith(BoundingCircle other)
-        {
-            return CollisionHelper.Collides(other, this);
-        } */
     }
 }
