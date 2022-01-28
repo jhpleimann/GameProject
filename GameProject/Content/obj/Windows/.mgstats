@@ -1,0 +1,9 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/DoorEntrance.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/DoorEntrance.xnb","TextureProcessor","Texture2DContent",289,32853,0.1502306
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassFloor.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/GrassFloor.xnb","TextureProcessor","Texture2DContent",165,16469,0.1891129
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloor.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/GrassTrapFloor.xnb","TextureProcessor","Texture2DContent",190,16469,0.0037783
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloorSpike.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/GrassTrapFloorSpike.xnb","TextureProcessor","Texture2DContent",2385,16469,0.1494139
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Pixel.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/Pixel.xnb","TextureProcessor","Texture2DContent",119,89,0.6572183
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose1.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/PlayerPose1.xnb","TextureProcessor","Texture2DContent",807,16469,0.2080046
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose2.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/PlayerPose2.xnb","TextureProcessor","Texture2DContent",801,16469,0.0043454
+"C:/Users/jplmn/source/repos/GameProject/GameProject/Content/ZaWarudo.png","C:/Users/jplmn/source/repos/GameProject/GameProject/Content/bin/Windows/ZaWarudo.xnb","TextureProcessor","Texture2DContent",1155,16469,0.0061846
