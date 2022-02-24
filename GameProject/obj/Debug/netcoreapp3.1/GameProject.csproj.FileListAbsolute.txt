@@ -44,3 +44,11 @@ C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Cont
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\PlayerPose2.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\Pixel.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\Arial.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GameMusic.wma
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GameMusic.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\EndLevelSound.wma
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\EndLevelSound.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HitNoise.wma
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HitNoise.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HolyDeathSound.wma
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HolyDeathSound.xnb

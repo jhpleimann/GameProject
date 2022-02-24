@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameProject
 {
@@ -19,6 +21,10 @@ namespace GameProject
         private LevelEntrance levelEntrance;
 
         private SpriteFont spriteFont;
+
+        private SoundEffect holyDeath;
+        private SoundEffect levelEnd;
+        private Song backgroundMusic;
 
         private int gameLevel = 0;
 
@@ -72,6 +78,12 @@ namespace GameProject
             spriteFont = Content.Load<SpriteFont>("Arial");
             texture2 = Content.Load<Texture2D>("Pixel");
             levelEntrance.LoadContent(Content);
+            levelEnd = Content.Load<SoundEffect>("EndLevelSound");
+            holyDeath = Content.Load<SoundEffect>("HolyDeathSound");
+            backgroundMusic = Content.Load<Song>("GameMusic");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = .01f;
+            MediaPlayer.Play(backgroundMusic);
         }
 
         /// <summary>
@@ -97,12 +109,14 @@ namespace GameProject
             }
             if(levelEntrance.Bounds.CollidesWith(player.Bounds))
             {
+                levelEnd.Play();
                 Exit();
             }
-            if(trapGrass.Bounds.CollidesWith(player.Bounds))
+            if(trapGrass.Bounds.CollidesWith(player.Bounds) && !player.Dead)
             {
                 trapGrass.PlayerCollide = true;
                 player.Dead = true;
+                holyDeath.Play();
             }
             base.Update(gameTime);
         }

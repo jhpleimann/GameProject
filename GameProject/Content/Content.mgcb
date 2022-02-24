@@ -32,6 +32,18 @@
 /processorParam:TextureFormat=Color
 /build:DoorEntrance.png
 
+#begin EndLevelSound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:EndLevelSound.mp3
+
+#begin GameMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:GameMusic.mp3
+
 #begin GrassFloor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,6 +79,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:GrassTrapFloorSpike.png
+
+#begin HitNoise.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:HitNoise.mp3
+
+#begin HolyDeathSound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:HolyDeathSound.mp3
 
 #begin Pixel.png
 /importer:TextureImporter
