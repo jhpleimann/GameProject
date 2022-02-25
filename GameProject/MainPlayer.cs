@@ -21,15 +21,18 @@ namespace GameProject
 
         private Vector2 position;
 
+        //Gravity Stuff
+        private Vector2 velocity;
+
+        private Vector2 JumpVelocity = new Vector2(0, 7);
+
+        private Vector2 GravityVelocity = new Vector2(0, 10);
+
         private bool flipped;
 
         private BoundingRectangle bounds;
 
         private double animationTimer;
-
-        private double gravityTimer = 0.0;
-
-        private float gravityTimerMax = 0.7f;
 
         private bool animationPose = false;
 
@@ -67,6 +70,7 @@ namespace GameProject
         public void LoadContent(ContentManager content)
         {
             position = new Vector2(200, 200);
+            velocity = new Vector2(0, 0);
             texture = content.Load<Texture2D>("PlayerPose1");
             texture2 = content.Load<Texture2D>("PlayerPose2");
             bounds = new BoundingRectangle(position, texture.Width, texture.Height);//new Vector2(200 - 16, 200 - 16)
@@ -82,6 +86,7 @@ namespace GameProject
             keyboardState = Keyboard.GetState();
 
             position += gamePadState.ThumbSticks.Left * new Vector2(1, -1);
+
             if (gamePadState.ThumbSticks.Left.X < 0) flipped = true;
             if (gamePadState.ThumbSticks.Left.X > 0) flipped = false;
 
@@ -95,39 +100,32 @@ namespace GameProject
                 }
             }    
 
-            if ((keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) && !jumping && OnGround && gravityTimer <= 0.0)
+            if ((keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) && !jumping && OnGround)
             {
                 jumping = true;
-            }
-            if(jumping && gravityTimer <= 0.0)
-            {
-                gravityTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if(jumping && gravityTimer >= gravityTimerMax)
-            {
-                gravityTimer = 0.0;
-                jumping = false;
-            }
-            else if(jumping)
-            {
-                gravityTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                position.Y -= MathF.Pow((1 + (float)gameTime.ElapsedGameTime.TotalSeconds) * 3f, 2);
+                OnGround = false;
+                velocity -= JumpVelocity;
             }
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
-                position += new Vector2(-1, 0);
+                position += new Vector2(-2, 0);
                 flipped = true;
             }
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
-                position += new Vector2(1, 0);
+                position += new Vector2(2, 0);
                 flipped = false;
             }
             if(!OnGround && GameStarted)
             {
-                position.Y += 150f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                velocity += GravityVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            //Update the bounds
+            else if(GameStarted)
+            {
+                velocity.Y = 0;
+                jumping = false;
+            }
+            position += velocity;
             bounds.X = position.X;
             bounds.Y = position.Y;
         }
