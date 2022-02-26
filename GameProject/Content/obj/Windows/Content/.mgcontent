@@ -11,13 +11,25 @@
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassFloor.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloor.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GrassTrapFloorSpike.png</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GuardGunPose.png</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GuardPose.png</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GuardShootingPose1.png</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/GuardShootingPose2.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/HitNoise.mp3</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/HolyDeathSound.mp3</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/LaserShot.png</File>
+    <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/MetalFloor.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/Pixel.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose1.png</File>
     <File>C:/Users/jplmn/source/repos/GameProject/GameProject/Content/PlayerPose2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

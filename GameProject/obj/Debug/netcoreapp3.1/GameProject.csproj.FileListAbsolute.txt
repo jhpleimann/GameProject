@@ -52,3 +52,9 @@ C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Cont
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HitNoise.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HolyDeathSound.wma
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\HolyDeathSound.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GuardGunPose.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GuardPose.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GuardShootingPose1.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GuardShootingPose2.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\MetalFloor.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\LaserShot.xnb

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace GameProject
 {
@@ -12,9 +13,12 @@ namespace GameProject
         private SpriteBatch spriteBatch;
 
         private MainPlayer player;
+        private EnemyPlayer enemyPlayerOne;
         private Texture2D texture2;
 
         private GrassFloor[] grass;
+
+        private MetalFloor[] metal;
 
         private TrapGrassFloor trapGrass;
 
@@ -27,6 +31,8 @@ namespace GameProject
         private Song backgroundMusic;
 
         private int gameLevel = 0;
+
+        public List<EnemyLaser> lasers = new List<EnemyLaser>();
 
         /// <summary>
         /// A basic game with a title screen
@@ -45,6 +51,7 @@ namespace GameProject
         {
             Window.Title = "Guard of Vengance";
             player = new MainPlayer();
+            enemyPlayerOne = new EnemyPlayer(new Vector2(32, 352));
             grass = new GrassFloor[]
             {
                 new GrassFloor(new Vector2(800, 416)),
@@ -61,6 +68,23 @@ namespace GameProject
                 new GrassFloor(new Vector2(32, 416)),
                 new GrassFloor(new Vector2(0, 416)),
             };
+            metal = new MetalFloor[]
+            {
+                new MetalFloor(new Vector2(800, 416)),
+                new MetalFloor(new Vector2(736, 416)),
+                new MetalFloor(new Vector2(672, 416)),
+                new MetalFloor(new Vector2(608, 416)),
+                new MetalFloor(new Vector2(544, 416)),
+                new MetalFloor(new Vector2(480, 416)),
+                new MetalFloor(new Vector2(416, 416)),
+                new MetalFloor(new Vector2(352, 416)),
+                new MetalFloor(new Vector2(288, 416)),
+                new MetalFloor(new Vector2(224, 416)),
+                new MetalFloor(new Vector2(160, 416)),
+                new MetalFloor(new Vector2(96, 416)),
+                new MetalFloor(new Vector2(32, 416)),
+                new MetalFloor(new Vector2(0, 416)),
+            };
             trapGrass = new TrapGrassFloor(new Vector2(480,416));
             levelEntrance = new LevelEntrance(new Vector2(736, 288));
             base.Initialize();
@@ -73,7 +97,9 @@ namespace GameProject
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.LoadContent(Content);
+            enemyPlayerOne.LoadContent(Content);
             foreach (var piece in grass) piece.LoadContent(Content);
+            foreach (var piece in metal) piece.LoadContent(Content);
             trapGrass.LoadContent(Content);
             spriteFont = Content.Load<SpriteFont>("Arial");
             texture2 = Content.Load<Texture2D>("Pixel");
@@ -94,29 +120,71 @@ namespace GameProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if(player.GameStarted)
+            if(player.GameStarted && gameLevel == 0)
             {
                 gameLevel = 1;
             }
             player.Update(gameTime);
             player.OnGround = false;
-            foreach (var grassPiece in grass)
+            if(gameLevel == 1)
             {
-                if(grassPiece.Bounds.CollidesWith(player.Bounds))
+                foreach (var grassPiece in grass)
                 {
-                    player.OnGround = true;
+                    if (grassPiece.Bounds.CollidesWith(player.Bounds))
+                    {
+                        player.OnGround = true;
+                    }
+                }
+                if (levelEntrance.Bounds.CollidesWith(player.Bounds))
+                {
+                    levelEnd.Play();
+                    gameLevel = 2;
+                }
+                if (trapGrass.Bounds.CollidesWith(player.Bounds) && !player.Dead)
+                {
+                    trapGrass.PlayerCollide = true;
+                    player.Dead = true;
+                    holyDeath.Play();
                 }
             }
-            if(levelEntrance.Bounds.CollidesWith(player.Bounds))
+            if(gameLevel == 2)
             {
-                levelEnd.Play();
-                Exit();
+                foreach (var metalPiece in metal)
+                {
+                    if (metalPiece.Bounds.CollidesWith(player.Bounds))
+                    {
+                        player.OnGround = true;
+                    }
+                }
+                if (enemyPlayerOne.Bounds.CollidesWith(player.Bounds))
+                {
+                    gameLevel++;
+                    levelEnd.Play();
+                }
+                if(enemyPlayerOne.Shot)
+                {
+                    var laser = new EnemyLaser(new Vector2(32, 352));
+                    laser.LoadContent(Content);
+                    lasers.Add(laser);
+                }
+                foreach(var laser in lasers)
+                {
+                    if (laser.Bounds.CollidesWith(player.Bounds))
+                    {
+                        holyDeath.Play();
+                        Exit();
+                    }
+                }
             }
-            if(trapGrass.Bounds.CollidesWith(player.Bounds) && !player.Dead)
+            if(gameLevel == 3)
             {
-                trapGrass.PlayerCollide = true;
-                player.Dead = true;
-                holyDeath.Play();
+                foreach (var metalPiece in metal)
+                {
+                    if (metalPiece.Bounds.CollidesWith(player.Bounds))
+                    {
+                        player.OnGround = true;
+                    }
+                }
             }
             base.Update(gameTime);
         }
@@ -157,6 +225,36 @@ namespace GameProject
                 }
                 levelEntrance.Draw(gameTime, spriteBatch);
                 trapGrass.Draw(gameTime, spriteBatch);
+                spriteBatch.End();
+                base.Draw(gameTime);
+            }
+            else if (gameLevel == 2)
+            {
+                GraphicsDevice.Clear(Color.AntiqueWhite);
+                spriteBatch.Begin();
+                player.Draw(gameTime, spriteBatch);
+                enemyPlayerOne.Draw(gameTime, spriteBatch);
+                foreach (var metalPiece in metal)
+                {
+                    metalPiece.Draw(gameTime, spriteBatch);
+                }
+                foreach (var laser in lasers)
+                {
+                    laser.Draw(gameTime, spriteBatch);
+                }
+                spriteBatch.End();
+                base.Draw(gameTime);
+            }
+            else if (gameLevel == 3)
+            {
+                spriteBatch.Begin();
+                GraphicsDevice.Clear(Color.AntiqueWhite);
+                spriteBatch.DrawString(spriteFont, "You WIN. Press escape to close the game", new Vector2(2, 200), Color.Black);
+                player.Draw(gameTime, spriteBatch);
+                foreach (var metalPiece in metal)
+                {
+                    metalPiece.Draw(gameTime, spriteBatch);
+                }
                 spriteBatch.End();
                 base.Draw(gameTime);
             }
