@@ -7,9 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using GameProject.Collisions;
 
+
 namespace GameProject
 {
-    public class EnemyLaser
+    public class Elevator
     {
         private Vector2 position;
 
@@ -18,8 +19,6 @@ namespace GameProject
         private Texture2D texture2;
 
         private BoundingRectangle bounds;
-
-        private float angle;
 
         /// <summary>
         /// The bounding volume of the sprite
@@ -30,11 +29,9 @@ namespace GameProject
         /// Creates a new coin sprite
         /// </summary>
         /// <param name="position">The position of the sprite in the game</param>
-        public EnemyLaser(Vector2 position, float angle)
+        public Elevator(Vector2 position)
         {
             this.position = position;
-            this.angle = angle;
-            //this.bounds = new BoundingCircle(position + new Vector2(8, 8), 8);
         }
 
         /// <summary>
@@ -43,7 +40,7 @@ namespace GameProject
         /// <param name="content">The ContentManager to load with</param>
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("LaserShot");
+            texture = content.Load<Texture2D>("Elevator");
             texture2 = content.Load<Texture2D>("Pixel");
             this.bounds = new BoundingRectangle(position, texture.Width, texture.Height);
         }
@@ -52,19 +49,9 @@ namespace GameProject
         /// </summary>
         /// <param name="gameTime">The game time</param>
         /// <param name="spriteBatch">The spritebatch to render with</param>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Color color)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(angle == 0)
-            {
-                this.position += new Vector2(5, 0);
-            }
-            else
-            {
-                Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
-                this.position += velocity * 3;
-            }
-            this.bounds = new BoundingRectangle(position, texture.Width, texture.Height);
-            spriteBatch.Draw(texture, position, null, color, angle, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, null, Color.White, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
         }
     }
 }

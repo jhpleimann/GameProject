@@ -58,3 +58,5 @@ C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Cont
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\GuardShootingPose2.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\MetalFloor.xnb
 C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\LaserShot.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\EnemyTurret.xnb
+C:\Users\jplmn\source\repos\GameProject\GameProject\bin\Debug\netcoreapp3.1\Content\Elevator.xnb

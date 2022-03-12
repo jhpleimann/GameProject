@@ -11,6 +11,8 @@ namespace GameProject
 {
     public class MainPlayer
     {
+        Game game;
+
         private GamePadState gamePadState;
 
         private KeyboardState keyboardState;
@@ -19,9 +21,6 @@ namespace GameProject
 
         private Texture2D texture2;
 
-        private Vector2 position;
-
-        //Gravity Stuff
         private Vector2 velocity;
 
         private Vector2 JumpVelocity = new Vector2(0, 7);
@@ -37,6 +36,16 @@ namespace GameProject
         private bool animationPose = false;
 
         private bool jumping = false;
+
+        /// <summary>
+        /// True if player should be bound to the screen
+        /// </summary>
+        public bool BoundedScreen = true;
+
+        /// <summary>
+        /// The position of the player
+        /// </summary>
+        public Vector2 Position;
 
         /// <summary>
         /// True if the player is on the ground, false otherwise
@@ -63,17 +72,19 @@ namespace GameProject
         /// </summary>
         public BoundingRectangle Bounds => bounds;
 
+        ContentManager con;
         /// <summary>
         /// Loads the sprite texture using the provided ContentManager
         /// </summary>
         /// <param name="content">The ContentManager to load with</param>
         public void LoadContent(ContentManager content)
         {
-            position = new Vector2(200, 200);
+            con = content;
+            Position = new Vector2(200, 200);
             velocity = new Vector2(0, 0);
             texture = content.Load<Texture2D>("PlayerPose1");
             texture2 = content.Load<Texture2D>("PlayerPose2");
-            bounds = new BoundingRectangle(position, texture.Width, texture.Height);//new Vector2(200 - 16, 200 - 16)
+            bounds = new BoundingRectangle(Position, texture.Width, texture.Height);//new Vector2(200 - 16, 200 - 16)
         }
 
         /// <summary>
@@ -85,7 +96,7 @@ namespace GameProject
             gamePadState = GamePad.GetState(0);
             keyboardState = Keyboard.GetState();
 
-            position += gamePadState.ThumbSticks.Left * new Vector2(1, -1);
+            Position += gamePadState.ThumbSticks.Left * new Vector2(1, -1);
 
             if (gamePadState.ThumbSticks.Left.X < 0) flipped = true;
             if (gamePadState.ThumbSticks.Left.X > 0) flipped = false;
@@ -108,12 +119,12 @@ namespace GameProject
             }
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
-                position += new Vector2(-2, 0);
+                Position += new Vector2(-2, 0);
                 flipped = true;
             }
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
-                position += new Vector2(2, 0);
+                Position += new Vector2(2, 0);
                 flipped = false;
             }
             if(!OnGround && GameStarted)
@@ -125,9 +136,17 @@ namespace GameProject
                 velocity.Y = 0;
                 jumping = false;
             }
-            position += velocity;
-            bounds.X = position.X;
-            bounds.Y = position.Y;
+            Position += velocity;
+            bounds.X = Position.X;
+            bounds.Y = Position.Y;
+
+            if(BoundedScreen)
+            {
+                if (Position.Y < 0) Position.Y = 800;
+                if (Position.Y > 800) Position.Y = 0;
+                if (Position.X < 0) Position.X = 800;
+                if (Position.X > 800) Position.X = 0;
+            }
         }
 
         /// <summary>
@@ -149,11 +168,11 @@ namespace GameProject
             }
             if(animationPose)
             {
-                spriteBatch.Draw(texture, position, null, Color, 0, new Vector2(0,0), 1.0f, spriteEffects, 0);//64,64
+                spriteBatch.Draw(texture, Position, null, Color, 0, new Vector2(0,0), 1.0f, spriteEffects, 0);//64,64
             }
             else
             {
-                spriteBatch.Draw(texture2, position, null, Color, 0, new Vector2(0,0), 1.0f, spriteEffects, 0);
+                spriteBatch.Draw(texture2, Position, null, Color, 0, new Vector2(0,0), 1.0f, spriteEffects, 0);
             }
         }
     }

@@ -26,6 +26,10 @@ namespace GameProject
 
         private SpriteFont spriteFont;
 
+        private EnemyTurret enemyTurret;
+
+        private Elevator elevator;
+
         private SoundEffect holyDeath;
         private SoundEffect levelEnd;
         private Song backgroundMusic;
@@ -70,6 +74,9 @@ namespace GameProject
             };
             metal = new MetalFloor[]
             {
+                new MetalFloor(new Vector2(992, 416)),
+                new MetalFloor(new Vector2(928, 416)),
+                new MetalFloor(new Vector2(864, 416)),
                 new MetalFloor(new Vector2(800, 416)),
                 new MetalFloor(new Vector2(736, 416)),
                 new MetalFloor(new Vector2(672, 416)),
@@ -87,6 +94,8 @@ namespace GameProject
             };
             trapGrass = new TrapGrassFloor(new Vector2(480,416));
             levelEntrance = new LevelEntrance(new Vector2(736, 288));
+            elevator = new Elevator(new Vector2(864, 288));
+            enemyTurret = new EnemyTurret(new Vector2(320, 64));
             base.Initialize();
         }
 
@@ -101,9 +110,11 @@ namespace GameProject
             foreach (var piece in grass) piece.LoadContent(Content);
             foreach (var piece in metal) piece.LoadContent(Content);
             trapGrass.LoadContent(Content);
+            enemyTurret.LoadContent(Content);
             spriteFont = Content.Load<SpriteFont>("Arial");
             texture2 = Content.Load<Texture2D>("Pixel");
             levelEntrance.LoadContent(Content);
+            elevator.LoadContent(Content);
             levelEnd = Content.Load<SoundEffect>("EndLevelSound");
             holyDeath = Content.Load<SoundEffect>("HolyDeathSound");
             backgroundMusic = Content.Load<Song>("GameMusic");
@@ -158,16 +169,42 @@ namespace GameProject
                 }
                 if (enemyPlayerOne.Bounds.CollidesWith(player.Bounds))
                 {
+                    lasers = new List<EnemyLaser>();
                     gameLevel++;
                     levelEnd.Play();
                 }
                 if(enemyPlayerOne.Shot)
                 {
-                    var laser = new EnemyLaser(new Vector2(32, 352));
+                    var laser = new EnemyLaser(new Vector2(32, 352), 0);
                     laser.LoadContent(Content);
                     lasers.Add(laser);
                 }
-                foreach(var laser in lasers)
+                /*foreach(var laser in lasers)
+                {
+                    if (laser.Bounds.CollidesWith(player.Bounds))
+                    {
+                        holyDeath.Play();
+                        Exit();
+                    }
+                }*/
+            }
+            if(gameLevel == 3)
+            {
+                player.BoundedScreen = false;
+                foreach (var metalPiece in metal)
+                {
+                    if (metalPiece.Bounds.CollidesWith(player.Bounds))
+                    {
+                        player.OnGround = true;
+                    }
+                }
+                if (enemyTurret.Shot)
+                {
+                    var laser = new EnemyLaser(new Vector2(320, 64), enemyTurret.Angle);
+                    laser.LoadContent(Content);
+                    lasers.Add(laser);
+                }
+                foreach (var laser in lasers)
                 {
                     if (laser.Bounds.CollidesWith(player.Bounds))
                     {
@@ -175,9 +212,16 @@ namespace GameProject
                         Exit();
                     }
                 }
+                if (elevator.Bounds.CollidesWith(player.Bounds))
+                {
+                    levelEnd.Play();
+                    gameLevel = 4;
+                }
+                enemyTurret.Update(gameTime);
             }
-            if(gameLevel == 3)
+            if (gameLevel == 4)
             {
+                player.BoundedScreen = true;
                 foreach (var metalPiece in metal)
                 {
                     if (metalPiece.Bounds.CollidesWith(player.Bounds))
@@ -231,21 +275,45 @@ namespace GameProject
             else if (gameLevel == 2)
             {
                 GraphicsDevice.Clear(Color.AntiqueWhite);
-                spriteBatch.Begin();
+                spriteBatch.Begin(blendState: BlendState.AlphaBlend);
+                //spriteBatch.Begin();
                 player.Draw(gameTime, spriteBatch);
-                enemyPlayerOne.Draw(gameTime, spriteBatch);
+                enemyPlayerOne.Draw(gameTime, spriteBatch, new Color(0.5f, 0.2f, 0.4f, 0.5f));
                 foreach (var metalPiece in metal)
                 {
                     metalPiece.Draw(gameTime, spriteBatch);
                 }
                 foreach (var laser in lasers)
                 {
-                    laser.Draw(gameTime, spriteBatch);
+                    laser.Draw(gameTime, spriteBatch, new Color(0.5f, 0.2f, 0.4f, 0.5f));
                 }
                 spriteBatch.End();
                 base.Draw(gameTime);
             }
             else if (gameLevel == 3)
+            {
+                float playerX = MathHelper.Clamp(player.Position.X, 300, 13600);
+                float offsetX = 300 - playerX;
+
+                Matrix transform = Matrix.CreateTranslation(offsetX * 0.333f, 0, 0);
+                spriteBatch.Begin(transformMatrix: transform);
+                GraphicsDevice.Clear(Color.AntiqueWhite);
+                //spriteBatch.DrawString(spriteFont, "You WIN. Press escape to close the game", new Vector2(2, 200), Color.Black);
+                player.Draw(gameTime, spriteBatch);
+                foreach (var metalPiece in metal)
+                {
+                    metalPiece.Draw(gameTime, spriteBatch);
+                }
+                foreach (var laser in lasers)
+                {
+                    laser.Draw(gameTime, spriteBatch, Color.PaleVioletRed);
+                }
+                elevator.Draw(gameTime, spriteBatch);
+                enemyTurret.Draw(gameTime, spriteBatch);
+                spriteBatch.End();
+                base.Draw(gameTime);
+            }
+            else if (gameLevel == 4)
             {
                 spriteBatch.Begin();
                 GraphicsDevice.Clear(Color.AntiqueWhite);

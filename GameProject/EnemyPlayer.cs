@@ -60,20 +60,20 @@ namespace GameProject
         /// </summary>
         /// <param name="gameTime">The game time</param>
         /// <param name="spriteBatch">The spritebatch to render with</param>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Color color)
         {
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
             SpriteEffects spriteEffects = (Flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            spriteBatch.Draw(texture, position, null, Color.LightGray, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, null, color, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
             Shot = false;
             if (animationTimer > 2.0)
             {
-                spriteBatch.Draw(texture3, position, null, Color.OrangeRed, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
+                spriteBatch.Draw(texture3, position, null, color, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
                 animationTimer = 0;
             }
             else if(animationTimer < 1.0)
             {
-                spriteBatch.Draw(texture3, position, null, Color.OrangeRed, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
+                spriteBatch.Draw(texture3, position, null, color, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
             }
             else
             {
@@ -84,18 +84,18 @@ namespace GameProject
                     Shot = true;
                     if (shootAnimation)
                     {
-                        spriteBatch.Draw(texture, position, null, Color.OrangeRed, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
+                        spriteBatch.Draw(texture, position, null, color, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
                         shootAnimation = false;
                     }
                     else
                     {
-                        spriteBatch.Draw(texture2, position, null, Color.OrangeRed, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
+                        spriteBatch.Draw(texture2, position, null, color, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
                         shootAnimation = true;
                     }
                 }
                 else
                 {
-                    spriteBatch.Draw(texture3, position, null, Color.OrangeRed, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
+                    spriteBatch.Draw(texture3, position, null, color, 0, new Vector2(0, 0), 1.0f, spriteEffects, 0);
                 }
             }
         }
